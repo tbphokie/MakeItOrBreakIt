@@ -1,0 +1,110 @@
+body{
+    font-family: Permanent Marker, cursive;
+}
+
+.bgimg{
+    background-image: url("http://www.curtislibrary.com/wp-content/uploads/2014/03/Copy-of-graph-paper-background.gif");
+	height: 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+    position: relative;
+}
+
+#main-header{
+    font-family: Permanent Marker, cursive;
+    /* text-align: center; */
+    font-size: 7.4em;
+    padding: 6%;
+    width: 89%;
+    margin-left: 6%;
+    margin-top: -1%;
+}
+
+#highlight {
+    background-color: #36D61C;
+    display: inline-block;
+    height:65%;
+    border-radius: 15px 50px 30px;
+}
+
+#break{
+    transform: rotate(25deg);
+    float: right;
+    text-decoration: line-through;
+    color: red;
+}
+
+.strike{
+    color:#333;
+}
+
+
+
+.navbar{
+    position: fixed;
+    border-top-color: #36D61C;
+    border-top-width: 6px;
+    height: 8%;
+}
+.navbar-text{
+    font-size: 1.5em;
+    color: #FFFFFF;
+    margin-left: 93px;
+}
+
+.form-inline{
+   margin: 10px 30%;
+}
+
+.form-control{
+    width: 43%;
+    margin: 3px 17px 5px 5px;
+}
+
+.table{
+    border-top: solid 3px #333;
+    border-bottom: solid 10px #333;
+    border-left:solid 12px #36D61C;
+    border-right:solid 12px #36D61C;
+    
+}
+
+th{
+    background-color: #333;
+    font-size: 2.5em;
+    font-family: Permanent Marker, cursive;
+}
+
+td{
+    font-size: 1.9em;
+}
+
+.table,
+th{
+    text-align: center;
+    vertical-align: middle;
+    width: 45%;
+    }
+
+th{
+    color: #36D61C;
+} 
+
+.usertable{
+    width: 114%;
+    margin-left: 22%;
+    border-radius: 20px 20px 20px 20px;
+}
+
+.righttable{
+    float: right;
+
+}
+
+.btn-block{
+    width: 45%;
+    background-color: #36D61C;
+    font-size: 1.3em;
+    border: none;
+}

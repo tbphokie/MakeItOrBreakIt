@@ -1,0 +1,57 @@
+<h1>
+    Your Habits</h1>
+
+<h3> Habits to make </h3>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Complete Action</th>
+    </tr>
+    {{#each habits}} {{#if this.make}}
+    <tr>
+        <td><a href="#">{{this.name}}</a></td>
+        {{#if this.progress}}
+        <td><label><input disabled checked="checked" type="checkbox" value="done" id={{this.id}} action="/api/updatehabit/:id" method="POST">Done</label></td>
+        {{/if}} {{#unless this.progress}}
+        <td><label><input type="checkbox" value="{{this.id}}" id="updateCheck" >Complete?</label></td>
+        {{/unless}}
+    </tr>
+    {{/if}} {{/each}}
+</table>
+
+
+<h3> Habits to break </h3>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Complete Action</th>
+    </tr>
+    {{#each habits}} {{#unless this.make}}
+    <tr>
+        <td><a href="#">{{this.name}}</td></a></td>
+        {{#if this.progress}}
+        <td><label><input disabled checked="checked" type="checkbox" value="done" id={{this.id}} onclick="changeValueCheckbox(this)">Done</label></td>
+        {{/if}} {{#unless this.progress}}
+        <td><label><input type="checkbox" value="done" id={{this.id}}>Complete?</label></td>
+        {{/unless}}
+    </tr>
+    {{/unless}} {{/each}}
+</table>
+<br>
+<a href="/createhabit/{{id}}.html?user={{id}}"> My Habits </a>
+
+<script>
+    $(document).ready(function () {
+        $(document).on("click", "#updateCheck", updateHabit);
+
+        function updateHabit(event) {
+            event.preventDefault();
+
+            var habitId = $("#updateCheck").val();
+            $.post("/api/updatehabit/" + habitId);
+            location.reload();
+        }
+    });
+
+</script>

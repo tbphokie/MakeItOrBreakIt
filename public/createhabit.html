@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>    
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+      <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet"> 
+      <link rel="stylesheet" href="../sassoutput/output.css">
+      <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
+
+       <title>Document</title>
+</head>
+
+<body>
+    
+     <div class="row">
+        <div class="col-md-12">
+         <h1 id="small-header"> 
+            <span id="highlight"><b>MAKE</b> it </span> 
+            <span>OR</span> 
+            <span id="break"><span class="strike"> <b>BREAK</b> it</span></span> 
+         </h1>
+        </div> 
+     </div>
+
+
+    
+  <div class="container">
+    <h1>Make Habit</h1>
+    <form id="habit-form">
+      <div class="formhabit">
+        <label for="habit"><h2></h2></label>
+        <input placeholder="Name of new habit" id="new-habit-name"></input>
+      </div>
+      <br>
+      <div class="btn-group" data-toggle="buttons">
+        <label class="btn btn-primary active" align="center">
+          <input type="radio" name="radioGroup" value = "1" id="makebutton" aria-pressed="true" autocomplete="off" checked> Make Habit
+        </label>
+        <label class="btn btn-primary">
+          <input type="radio" name="radioGroup" value = "0" id="breakbutton" aria-pressed="false" autocomplete="off"> Break Habit
+        </label>
+        <br>
+        <br>
+        <button type="submit" id="submit" class="btn btn-primary" value="Submit">Create Habit</button>
+      </div>
+
+    </form>
+  </div>
+  <div class="container">
+    <div class="boxes">
+      <div class="box">Habit 1</div>
+      <div class="box">Habit 2</div>
+      <div class="box">Habit 3</div>
+      <div class="box">Habit 4</div>
+      <div class="box">Habit 5</div>
+
+    </div>
+  </div>
+  <p>
+  </p>
+</body>
+
+</html>
