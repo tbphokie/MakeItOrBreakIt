@@ -1,7 +1,7 @@
 {
-  "name": "habittracker",
+  "name": "makeitorbreakit",
   "version": "1.0.0",
-  "description": "",
+  "description": "Track your good and bad habits.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rabunc/Habittracker.git"
+    "url": "git+https://github.com/tbphokie/makeitorbreakit.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/rabunc/Habittracker/issues"
+    "url": "https://github.com/tbphokie/makeitorbreakit/issues"
   },
-  "homepage": "https://github.com/rabunc/Habittracker#readme",
+  "homepage": "https://github.com/tbphokie/makeitorbreakit#readme",
   "dependencies": {
     "async": "^2.5.0",
     "body-parser": "^1.18.1",
