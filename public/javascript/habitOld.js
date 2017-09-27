@@ -101,5 +101,6 @@ $(document).ready(function () {
 
     function upsertHabit(habitData) {
         $.post("/api/createhabit", habitData);
+        location.reload();
     }
 })
