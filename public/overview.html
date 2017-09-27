@@ -91,31 +91,40 @@
         
 <script>
   function validateInputs() {
-    $("#submit-button").click();
+    $("#submit-button").click();  //force html5 validation;
   var f = document.getElementsByTagName('form')[0];
   var user;
   var bTaken = false;
     user = $("#usr").val();  
     user.trim();
-    user.toLowerCase();
+    user = user.toLowerCase();
+    console.log(user);
   if(f.checkValidity()) {
-    //Check if user already exists before trying to add
-    //get all table entries
-    var rows = $('#user-table > tbody > tr');
-    //Parse table entries to get username
-    console.log(rows);
-    for(var i=0;i<rows.length;i++){
-      var cur = rows[i].innerText;
-      console.log(cur);
-      cur = cur.replace('\'s habits', '');
-      console.log(cur);
-      if(user === cur){
-        bTaken = true;
-        console.log("not adding " + user);
+    //Still check length here as well, doesn't always catch this issue
+    console.log("valid: length="+user.length);
+    if(user.length == 0){
+      $("#usr").attr('placeholder', "Invalid user name");
+      bTaken = true;
+    } else {
+        //Check if user already exists before trying to add
+      //get all table entries
+      var rows = $('#user-table > tbody > tr');
+      //Parse table entries to get username
+      console.log(rows);
+      for(var i=0;i<rows.length;i++){
+        var cur = rows[i].innerText;
+        console.log(cur);
+        cur = cur.replace('\'s habits', '');
+        console.log(cur);
+        if(user === cur){
+          bTaken = true;
+          console.log("not adding " + user);
+        }
       }
     }
     if(!bTaken){
-      createUser();
+      console.log("adding: "+ user);
+      createUser(user);
       $('#createUserModal .close').click();
       location.reload();
     } else {
@@ -125,8 +134,8 @@
 
     }
     
-  } else {
-
+  } else {  //html5 caught a problem
+    console.log("not valid");
     if(user.length ==0){
       $("#usr").attr('placeholder', "Invalid user name");
     }
@@ -137,7 +146,7 @@
   }
 
   function createUser(){
-    name = $("#usr").val();
+    name = user;
     pass = $("#pwd").val();
 
     upsertUser(
