@@ -1,57 +1,73 @@
-<h1>
-    Your Habits</h1>
-
-<h3> Habits to make </h3>
-
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Complete Action</th>
-    </tr>
-    {{#each habits}} {{#if this.make}}
-    <tr>
-        <td><a href="#">{{this.name}}</a></td>
-        {{#if this.progress}}
-        <td><label><input disabled checked="checked" type="checkbox" value="done" id={{this.id}} action="/api/updatehabit/:id" method="POST">Done</label></td>
-        {{/if}} {{#unless this.progress}}
-        <td><label><input type="checkbox" value="{{this.id}}" id="updateCheck" >Complete?</label></td>
-        {{/unless}}
-    </tr>
-    {{/if}} {{/each}}
-</table>
+ <h1 id="habitheadline">Your Habits</h1>
 
 
-<h3> Habits to break </h3>
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Complete Action</th>
-    </tr>
-    {{#each habits}} {{#unless this.make}}
-    <tr>
-        <td><a href="#">{{this.name}}</td></a></td>
-        {{#if this.progress}}
-        <td><label><input disabled checked="checked" type="checkbox" value="done" id={{this.id}} onclick="changeValueCheckbox(this)">Done</label></td>
-        {{/if}} {{#unless this.progress}}
-        <td><label><input type="checkbox" value="done" id={{this.id}}>Complete?</label></td>
-        {{/unless}}
-    </tr>
-    {{/unless}} {{/each}}
-</table>
+
+<div class="row">
+    <div class="col-md-6">
+       <span class="highlight2"></span> <h3 class="table-tops"> Habits to make </h3></span>  
+          <table class="table">
+            <tr class="habit-table-headers">
+                <th>Name</th>
+                <th>Complete Action</th>
+            </tr>
+            {{#each habits}} {{#if this.make}}
+            <tr>
+                <td><a id = {{this.name}} href="#">{{this.name}}</a></td>
+                {{#if this.progress}}
+                <td><label><input disabled checked="checked" type="checkbox" value="done" id="{{this.id}}">Done</label></td>
+                {{/if}} {{#unless this.progress}}
+                <td><label><input type="checkbox" value="{{this.id}}" class="updateMCheck" >Complete?</label></td>
+                {{/unless}}
+            </tr>
+            {{/if}} {{/each}}
+        </table>
+    </div>
+
+
+    
+       <div class="col-md-6">
+           <span class="break2"><span class="strike"><h3 class="table-tops"> Habits to break </h3></span></span>
+            <table class="table">
+                <tr class="habit-table-headers">
+                    <th>Name</th>
+                    <th>Complete Action</th>
+                </tr>
+                {{#each habits}} {{#unless this.make}}
+                <tr>
+                    <td><a id= {{this.name}} href="#">{{this.name}}</td></a></td>
+                    {{#if this.progress}}
+                    <td><label><input disabled checked="checked" type="checkbox" value="done" id={{this.id}} action="/api/updatehabit/:id" method="POST">Done</label></td>
+                    {{/if}} {{#unless this.progress}}
+                    <td><label><input type="checkbox" value="{{this.id}}" class="updateBCheck">Complete?</label></td>
+                    {{/unless}}
+                </tr>
+                {{/unless}} {{/each}}
+            </table>
+        </div>    
+</div>
+
 <br>
-<a href="/createhabit/{{id}}.html?user={{id}}"> My Habits </a>
+<h3 class="table-tops more-info-link"><a id= "my-habits-link" href="/createhabit/{{id}}.html?user={{id}}"> My Habits <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a></h3>
+
 
 <script>
     $(document).ready(function () {
-        $(document).on("click", "#updateCheck", updateHabit);
+        $(document).on("click", ".updateMCheck", updateHabit);
+        $(document).on("click", ".updateBCheck", updateHabit);
 
         function updateHabit(event) {
             event.preventDefault();
 
-            var habitId = $("#updateCheck").val();
-            $.post("/api/updatehabit/" + habitId);
-            location.reload();
-        }
+            var habitId = this.value;
+            
+            console.log("MAKE id="+habitId);
+            //$.get("/user/"+userId, function (userHabits) {
+            $.post("/api/updatehabit/" + habitId, function(){
+                location.reload();
+            });  
+        };
+      
     });
 
 </script>
+

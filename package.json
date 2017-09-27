@@ -1,7 +1,7 @@
 {
-  "name": "makeitorbreakit",
+  "name": "habittracker",
   "version": "1.0.0",
-  "description": "Track your good and bad habits.",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,24 +9,28 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tbphokie/makeitorbreakit.git"
+    "url": "git+https://github.com/rabunc/Habittracker.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tbphokie/makeitorbreakit/issues"
+    "url": "https://github.com/rabunc/Habittracker/issues"
   },
-  "homepage": "https://github.com/tbphokie/makeitorbreakit#readme",
+  "homepage": "https://github.com/rabunc/Habittracker#readme",
   "dependencies": {
     "async": "^2.5.0",
     "body-parser": "^1.18.1",
+    "chai": "^4.1.2",
     "express": "^4.15.4",
     "express-handlebars": "^3.0.0",
     "method-override": "^2.3.9",
+    "mocha": "^3.5.3",
     "moment": "^2.18.1",
     "mysql": "^2.14.1",
     "mysql2": "^1.4.2",
-    "sequelize": "^4.8.4"
+    "nightmare": "^2.10.0",
+    "sequelize": "^4.8.4",
+    "xpath": "0.0.24"
   },
   "devDependencies": {}
 }

@@ -16,7 +16,9 @@ $(document).ready(function () {
         console.log(event)
         console.log(habitInput)
         console.log(userId)
+
         var selValue = $('input[name=radioGroup]:checked').val();
+
         if (!habitInput.val().trim()) {
             return;
         }

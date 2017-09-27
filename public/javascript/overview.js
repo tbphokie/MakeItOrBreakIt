@@ -8,6 +8,7 @@ $(document).ready(function () {
             var rowSpan = $("<a>")
             rowSpan.append(data[i].username + "'s habits")
             rowSpan.attr("href", "/user/" + data[i].id)
+            rowSpan.attr("class", "user-login-link")
             tableRow.append(rowSpan)
             userTable.append(tableRow)
         }

@@ -46,15 +46,16 @@ body{
     border-top-color: #36D61C;
     border-top-width: 6px;
     height: 8%;
+    display: none;
 }
 .navbar-text{
-    font-size: 1.5em;
+    font-size: 1.75em;
     color: #FFFFFF;
-    margin-left: 93px;
+    margin-left: 96px;
 }
 
 .form-inline{
-   margin: 10px 30%;
+   margin: 10px 10%;
 }
 
 .form-control{
@@ -62,39 +63,46 @@ body{
     margin: 3px 17px 5px 5px;
 }
 
-.table{
+/* .table{
     border-top: solid 3px #333;
     border-bottom: solid 10px #333;
     border-left:solid 12px #36D61C;
     border-right:solid 12px #36D61C;
     
-}
-
-th{
-    background-color: #333;
-    font-size: 2.5em;
-    font-family: Permanent Marker, cursive;
-}
+} */
 
 td{
     font-size: 1.9em;
 }
 
+.user-table-body{
+    font-size: 2.75em;
+    overflow: auto;
+    display: inline-block;
+    
+}
+
 .table,
-th{
+th,
+tr,
+td{
     text-align: center;
     vertical-align: middle;
-    width: 45%;
+    border: none;
     }
+
+#user-table-top{
+    background-color: #333;
+    font-size: 2.5em;
+}
 
 th{
     color: #36D61C;
 } 
 
-.usertable{
-    width: 114%;
-    margin-left: 22%;
-    border-radius: 20px 20px 20px 20px;
+#usertable{
+    width: 50%;
+    margin-left: 49%;
 }
 
 .righttable{
@@ -108,3 +116,180 @@ th{
     font-size: 1.3em;
     border: none;
 }
+/* Styling For the Index Handlebars Page */
+#habitheadline{
+    font-size: 8.5em;
+    text-align: center;
+    /* color: #36D61C; */
+}
+
+.table-tops{
+    font-size: 4em;
+    margin-left: 15%;
+}
+
+.habit-table-headers{
+    font-size: 2.25em;
+    text-decoration: underline;
+}
+
+.break2{
+    text-decoration: line-through;
+    color: red;
+}
+
+.highlight2{
+    background-color: #36D61C;
+    position: inline-block;
+
+}
+
+.more-info-link{
+    float: right;
+    margin-right: 9%;
+}
+
+.glyphicon{
+    color:#337ab7;
+}
+/* Styling for the createhabitOld page  */
+
+.make-habit-headlines{
+    font-size:3em;
+}
+
+#entergoodHabit,
+#enterbadHabit{
+    width: 85%;
+    font-size: 2em;
+    border: #333 solid 2px;
+}
+
+#submit{
+    width: 85%;
+    background-color: #333;
+}
+
+.go-back-link{
+    font-size: 4em;
+    margin-left: -3%;
+}
+
+.info-table{
+    color: #337ab7;
+    font-size: 1.4em;
+    border-bottom: #333 solid 4px;
+}
+
+
+@media only screen and (min-width: 1440px) {
+    
+       #main-header{
+           font-family: Permanent Marker, cursive;
+           font-size: 7.3em;
+           padding: 6%;
+           width: 89%;
+           margin-left: 6%;
+           margin-top: -1%;
+       
+       }
+       
+   }
+
+@media only screen and (max-width: 1024px) {
+    
+       #main-header{
+           font-family: Permanent Marker, cursive;
+           font-size: 5.3em;
+           padding: 6%;
+           width: 89%;
+           margin-left: 6%;
+       
+       }
+     #habitheadline  {
+         font-size: 6.5em;
+     }
+
+     .table-tops{
+         font-size: 3em;
+     }
+     .info-table{
+         font-size: 1.0em;
+     }
+   }
+
+
+@media only screen and (max-width: 768px) {
+    
+       #main-header{
+           font-family: Permanent Marker, cursive;
+           font-size: 4.3em;
+           padding: 6%;
+           width: 89%;
+           margin-left: 6%;
+           margin-top: 2%;
+       
+       }
+
+       #break{
+        transform: rotate(0deg);
+        float: right;
+       }
+
+       #habitheadline  {
+        font-size: 5.5em;
+        color: #337ab7;
+    }
+
+    .table-tops{
+        font-size: 3em;
+        margin-left: 27%;
+    }
+
+    .info-table{
+        font-size: 0.9em;
+    }
+    
+    .go-back-link {
+        font-size: 3em;
+        }
+       
+   }
+
+@media only screen and (max-width: 375px) {
+    
+       #main-header{
+           font-family: Permanent Marker, cursive;
+           font-size: 3.3em;
+           padding: 6%;
+           width: 89%;
+           margin-left: 6%;
+       
+       }
+       #break{
+        transform: rotate(0deg);
+       }
+
+       .mqttop{
+           margin-left: -15px;
+           margin-right: 0px;
+       }
+
+       #user-table-top{
+        
+        font-size: 1.75em;
+    }
+
+    .table-tops{
+        font-size: 2.2em;
+        margin-left: 20%;
+    }
+ 
+    .go-back-link {
+    font-size: 3em;
+    }
+    .make-habit-headlines{
+        font-size: 2em;
+    }
+}     
+      

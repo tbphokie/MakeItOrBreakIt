@@ -16,7 +16,7 @@
         
     <!-- This is the Header for the main web page "Make it or Break it" -->
       
-            <div class="row">
+           <div class="row mqtops">
               <div class="col-md-12">
                <h1 id="main-header"> 
                   <span id="highlight"><b>MAKE</b> it </span> 
@@ -29,37 +29,129 @@
 
  <!-- This is the first table  -->
  <div class="row usertable">
-   <div class="col-lg-12">
-      <table id = "user-table" class="table table-bordered make-habit-table">
-        <thead>
+   <div class="col-md-12">
+      <table id = "user-table" class="table table-bordered">
+        <thead id="user-table-top">
           <tr>
-            <th> LOG IN </th>
+            <th> CHOOSE A USER </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="user-table-body">
         </tbody>
       </table>
-     <!-- <a href="/createhabit.html"><button type="button" id="makehabit" class="btn btn-primary btn-block">Choose an Existing User</button></a> -->
+     <button type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#createUserModal" id="makehabit">Create New User</button>
     </div>
  </div> 
-              
+
+  <!-- Navigation Bar -->
+  <div class="container">
+    <nav class="navbar navbar-inverse justify-content-between navbar-fixed-bottom">
+        <p class="navbar-text">THE app to track habits..and help you improve</p>
+             <form class="form-inline">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Email" aria-label="email">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Password" aria-label="password">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log-In</button>
+             </form>
+    </nav>
+  </div>
+<!-- Modal -->
+<div class="modal fade" id="createUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create New Habit Tracker User</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="myForm"  >
+          <div class="form-group">
+            <label for="usr">Name:</label>
+            <input type="text" class="form-control" id="usr" placeholder="user name" title="Input a valid user name" required>
+          </div>
+          <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" id="pwd" placeholder="password" title="Input a valid password" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" onclick="validateInputs()"class="btn btn-primary">Create User</button>
+      </div>
+    </div>
+  </div>
+</div>          
                     
                 
 
- <!-- Navigation Bar -->
-        <div class="container">
-        <nav class="navbar navbar-inverse justify-content-between navbar-fixed-bottom">
-            <p class="navbar-text">MAKE it or BREAK it Log-In</p>
-                 <form class="form-inline">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Email" aria-label="email">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Password" aria-label="password">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log-In</button>
-                 </form>
-        </nav>
-        </div>
+
           
         
+<script>
+  function validateInputs() {
+    $("#submit-button").click();
+  var f = document.getElementsByTagName('form')[0];
+  var user;
+  var bTaken = false;
+    user = $("#usr").val();  
+    user.trim();
+    user.toLowerCase();
+  if(f.checkValidity()) {
+    //Check if user already exists before trying to add
+    //get all table entries
+    var rows = $('#user-table > tbody > tr');
+    //Parse table entries to get username
+    console.log(rows);
+    for(var i=0;i<rows.length;i++){
+      var cur = rows[i].innerText;
+      console.log(cur);
+      cur = cur.replace('\'s habits', '');
+      console.log(cur);
+      if(user !== cur){
+        bTaken = true;
+        console.log("added " + user);
+      }
+    }
+    if(!bTaken){
+      createUser();
+      $('#createUserModal .close').click();
+    } else {
+      $("#usr").val("");
+      $("#usr").attr('placeholder', "User name already taken, try again");
+      $("#usr").first().focus();
 
+    }
+    
+  } else {
+
+    if(user.length ==0){
+      $("#usr").attr('placeholder', "Invalid user name");
+    }
+    var pwd = $("#pwd").val();
+    if(pwd.length ==0){
+      $("#pwd").attr('placeholder', "Invalid user name");
+    }
+  }
+
+  function createUser(){
+    name = $("#usr").val();
+    pass = $("#pwd").val();
+
+    upsertUser(
+                {
+                    username: name,
+                    password: pass
+                },
+            );
+    function upsertUser(userData) {
+        $.post("/api/createuser", userData);
+    }        
+  }
+}
+</script>
 </body>
+
 <script src="https://code.jquery.com/jquery.js" type="text/javascript"></script>
 </html>

@@ -22,7 +22,9 @@ module.exports = function (sequelize, DataTypes) {
             foreignKey: {
                 allowNull: false
             },
+
             onDelete: "cascade"
+
         })
     });
     return Habit;

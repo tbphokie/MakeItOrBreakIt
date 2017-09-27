@@ -1,7 +1,9 @@
 var path = require("path");
 var db = require("../models")
 var async = require("async")
+
 var moment = require("moment");
+
 
 // Routes
 // =============================================================
@@ -17,16 +19,16 @@ module.exports = function (app) {
 
     //Retrieve current active streak
     app.get("/habitCurStreak/:id", function (req, res) {
-        db.Progress.findOne({
+        //console.log("HABIT_CUR_STREAK ID="+req.params.id);
+        db.Habit.findAll({
             where: {
-                HabitId: req.params.id,
-                date: {
-                    $lt: new Date(),
-                    $gt: new Date(new Date() - 24 * 60 * 60 * 1000)
-                }
-            }
+                UserId: req.params.id
+            },
+            include: [db.Progress]
+
         }).then(function (result) {
-            res.json(result);
+            //console.log("HABIT_CUR_STREAK JSON=",result);
+            res.send(result);
 
         });
     });
@@ -45,13 +47,16 @@ module.exports = function (app) {
     });
 
     //Retrieve all uncompleted habits for today NOT TESTED
+
     app.get("habitTodo/:id", function (req, res) {
+
         db.User.findOne({
             where: {
                 id: req.params.id
             },
             include: [db.Habit]
         })
+
             .then(function (result) {
                 // code to identify if the habit has been completed already today
                 async.each(result.Habits, function (habit, done) {
@@ -68,6 +73,7 @@ module.exports = function (app) {
                         })
                 }, function () {
                     res.render("days", { habits: result.Habits, id: result.id })
+
 
                 })
 
@@ -86,19 +92,39 @@ module.exports = function (app) {
     //Create new user   NOT TESTED
     app.post("/api/createuser", function (req, res) {
         db.User.create(req.body).then(function (result) {
-            req.json(result);
+            res.json(result);
         });
     });
 
+
     app.post("/api/completehabit/:id", function (req, res) {
+        console.log("API/COMPLETEHABIT");
         db.Progress.create(req.body)
             .then(function (result) {
                 res.json(result)
             })
+
     })
 
-    //Add todays progress to supplied habit NOT TESTED
+    //Retrieve current active streak
+    app.get("/habitCurStreak/:id", function (req, res) {
+        //console.log("HABIT_CUR_STREAK ID="+req.params.id);
+        db.Progress.findAll({
+                where: {
+                    HabitId: req.params.id
+                },
+                order: [['date', 'DESC']]
+                
+        }).then(function (result) {
+            console.log("HABIT_CUR_STREAK JSON=",result);
+            res.json(result);
+
+        });
+    });
+    
+    //Add todays progress to supplied habit
     app.post("/api/updatehabit/:id", function (req, res) {
+        console.log("api habitid="+req.params.id);       
         //First retrieve current consec_days value if exists
         db.Progress.findAll({
             limit: 1,
@@ -108,7 +134,7 @@ module.exports = function (app) {
             order: [['date', 'DESC']]
 
         }).then(function (days) {
-            console.log(days);
+
             var consec = 0;
             if (days === null) {
                 consec = days[0].consec_days + 1;
@@ -120,8 +146,10 @@ module.exports = function (app) {
 
             req.body.consec_days = consec;
             req.body.HabitId = req.params.id;
-            req.body.date = new Date();
+            //req.body.date = new Date();
+            
             db.Progress.create(req.body).then(function (result) {
+
                 res.json(result);
             });
         });
@@ -129,6 +157,7 @@ module.exports = function (app) {
     });
 
     //Retrieve all habits for user with supplied id
+
     /*       //Retrieve all habits for user with supplied id
            app.get("/user/:id", function (req, res) {
             db.User.findOne({
@@ -150,13 +179,15 @@ module.exports = function (app) {
             });
         });
      */
-    //Retrieve all habits for supplied user with progress data
+    //Retrieve all habits for supplied user with progress data to return handlebars page
     app.get("/user/:id", function (req, res) {
+
         db.User.findOne({
             where: {
                 id: req.params.id
             },
             include: [db.Habit]
+
         })
             .then(function (result) {
                 // code to identify if the habit has been completed already today
@@ -194,6 +225,46 @@ module.exports = function (app) {
             });
 
     });
+
+    //Retrieve all habits for supplied user with progress data and return json
+    app.get("/userDetail/:id", function (req, res) {
+         db.User.findOne({
+                    where: {
+                        id: req.params.id
+                    },
+                    include: [db.Habit]
+        
+                })
+                    .then(function (result) {
+                        // code to identify if the habit has been completed already today
+                        async.each(result.Habits, function (habit, done) {
+                            var now = new Date();
+                            var midnightToday = new Date(now.getYear(), now.getMonth(), now.getDate());
+                            db.Progress.findOne({
+                                where: {
+                                    date: { $gt: moment().subtract(1, 'days').endOf('day') },
+                                    HabitId: habit.id
+                                }
+                            })
+                                .then(function (result) {
+                                    // assigns the result to a progress attribute of the habit object
+                                    habit.progress = result;
+                                    if (result) {
+                                        habit.status = "Yes";
+                                    } else {
+                                        habit.status = "No";
+                                    }
+                                    done();
+                                })
+                        }, function () {
+                            res.json({ habits: result.Habits, id: result.id });
+        
+                        })
+
+                    });
+        
+            });
+
 
 }
 

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,71 +18,97 @@
 <body class="bgimg">
   <div class="container">
 
+    <h3 class="go-back-link"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span><a id = "back-link" href="/"> Go Back</a></h3>
     <div class="row">
-      <div class="col-md-6">
-        <h2>Make Habit</h2>
-        <form>
-          <textarea class="form-control" rows="5" id="entergoodHabit" required></textarea>
-          <button type="submit" id="submit" class="btn btn-primary" value='good'>     Make</button>
-        </form>
+        <div class="col-md-6">
+          <h2 class="make-habit-headlines">Enter a habit to Make</h2>
+          <form>
+            <textarea class="form-horizontal" rows="3" id="entergoodHabit" required></textarea>
+            <button type="submit" id="makeSubmit" class="btn btn-block btn-primary" value='good'>     Make</button>
+          </form>
+        </div>
+        <div class="col-md-6">
+          <h2 class="make-habit-headlines">Enter a habit to break</h2>
+          <form>
+            <textarea class="form-horizontal" rows="3" id="enterbadHabit"></textarea>
+            <button type="submit" id="breakSubmit" class="btn btn-block btn-primary" value='bad'> Break</button>
+          </form>
+        </div>
       </div>
-      <div class="col-md-6">
-        <h2>Break Habit</h2>
-        <form>
-          <textarea class="form-control" rows="5" id="enterbadHabit"></textarea>
-          <button type="submit" id="submit" class="btn btn-primary" value='bad'> Break</button>
-        </form>
-      </div>
-    </div>
 
-  </div>
+    
 
-  <br>
-  <div class="row">
-    <div class="col-md-12">
-      <table class="table table-bordered" width="100%" border="1" bgcolor="#ffffff">
-        <colgroup>
-          <col colspan="4">
-          <col colspan="3">
-          <col colspan="4">
-          <col colspan="1">
-          <col colspan="4">
+    <br>
+    
+      <div class="col-md-12">
+        <table class="table table-bordered" width="100%" bgcolor="#ffffff">
+          <colgroup>
+            <col colspan="4">
+            <col colspan="3">
+            <col colspan="4">
+            <col colspan="1">
+            <col colspan="4">
 
-        </colgroup>
+          </colgroup>
+          
+            <tr class="info-table">
+              <td colspan="3">Your Current Habit Goals</td>
+              <td colspan="3">Current Streak</td>
+              <td colspan="3">Longest Streak</td>
+              <td colspan="3">Last Updated</td>
+              <td colspan="3">Completed Habits</td>
+            </tr>
+          
+          <tbody id="tableData"></tbody>
+          <tr>
+            <td id="habitsList" colspan="3">
+            </td>
+            <td colspan="3" id="currentStreak">
+            </td>
+            <td colspan="3" id="longestStreak">
+            </td>
+            <td colspan="3" id="lastUpdated">
+            </td>
+            <td colspan="3" id="completedHabit">
+            </td>
+          </tr>
+        </table>
+        
+  <!-- </body>
 
-        <tr>
-          <td colspan="3">You Current Habit Goals</td>
-          <td colspan="3">Current Streak</td>
-          <td colspan="3">Weakest Streak</td>
-          <td colspan="3">Last Updated</td>
-          <td colspan="3">Completed Habits</td>
-        </tr>
-        <tr>
-          <td id="habitsList" colspan="3">
-            habit1
-          </td>
-          <td colspan="3" id="currentStreak"><br>
-            <br>
-          </td>
-          <td colspan="3" id="weakest">
-            <br>
-            <br>
+  </table> -->
+  <!-- </div>
+  </div> -->
+  <!-- </div> -->
 
-          </td>
-          <td colspan="3" id="lastUpdated">
-          </td>
-          <td colspan="3" id="completedHabit">
-          </td>
-        </tr>
-      </table>
+
 </body>
 
-</table>
-</div>
-</div>
-</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <script src="/javascript/habitOld.js"></script>
+<script>
+  function validate1() {
+    var x, text;
+    x = document.getElementById("entergoodHabit").value;
+    x.trim();
+    if (x === "") {
+      text = "Please enter habit before submitting";
+    }
+    document.getElementById("entergoodHabit").innerHTML = text;
+  }
+  function validate2() {
+    var x, text;
+    x = document.getElementById("enterbadHabit").value;
+    x.trim();
+    if (x === "") {
+      text = "Please enter habit before submitting";
+    }
+    document.getElementById("enterbadHabit").innerHTML = text;
+  }
 
+</script>
 </body>
+
 
 </html>
