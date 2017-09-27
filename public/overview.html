@@ -109,14 +109,15 @@
       console.log(cur);
       cur = cur.replace('\'s habits', '');
       console.log(cur);
-      if(user !== cur){
+      if(user === cur){
         bTaken = true;
-        console.log("added " + user);
+        console.log("not adding " + user);
       }
     }
     if(!bTaken){
       createUser();
       $('#createUserModal .close').click();
+      location.reload();
     } else {
       $("#usr").val("");
       $("#usr").attr('placeholder', "User name already taken, try again");
