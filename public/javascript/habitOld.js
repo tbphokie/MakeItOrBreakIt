@@ -9,8 +9,8 @@ $(document).ready(function () {
     console.log(userId)
     // var userId = sessionStorage.getItem("user-id")
 
-    $(document).on("click", "#submitMake", handleHabitFormSubmit);
-    $(document).on("click", "#submitBreak", handleHabitFormSubmit);
+    $(document).on("click", "#makeSubmit", handleHabitFormSubmit);
+    $(document).on("click", "#breakSubmit", handleHabitFormSubmit);
 
     //Get data to show in chart
     var streaks = [];
@@ -29,25 +29,30 @@ $(document).ready(function () {
 
         for(var i=0;i<userHabits.length;i++){
             var name = userHabits[i].name;
-            var curStreak = userHabits[i].Progresses[userHabits[i].Progresses.length-1].consec_days;
-            var date = moment(userHabits[i].Progresses[userHabits[i].Progresses.length-1].date).format('MM-DD-YYYY');
-            var longStreak = 0;
-            for(var j=0;j<userHabits[i].Progresses.length;j++){
-                if(userHabits[i].Progresses[j].consec_days > longStreak){
-                    longStreak = userHabits[i].Progresses[j].consec_days;
-                }
-            }
-            var doneValue=0;
-            if(curStreak >= 21){
-                doneValue = "✔";
-            } else {
-                doneValue = " ";
-            }
             $("#habitsList").append("<tr><td>"+name+"</td></tr>");
-            $("#currentStreak").append("<tr><td>"+curStreak+"</td></tr>");
-            $("#longestStreak").append("<tr><td>"+longStreak+"</td></tr>");
-            $("#lastUpdated").append("<tr><td>"+date+"</td></tr>");
-            $("#completedHabit").append("<tr><td>"+doneValue+"</td></tr>");
+            //If new habit with no progress, only add name
+            console.log(userHabits[i].Progresses);
+            if(userHabits[i].Progresses.length !== 0 ){
+                var curStreak = userHabits[i].Progresses[userHabits[i].Progresses.length-1].consec_days;
+                var date = moment(userHabits[i].Progresses[userHabits[i].Progresses.length-1].date).format('MM-DD-YYYY');
+                var longStreak = 0;
+                for(var j=0;j<userHabits[i].Progresses.length;j++){
+                    if(userHabits[i].Progresses[j].consec_days > longStreak){
+                        longStreak = userHabits[i].Progresses[j].consec_days;
+                    }
+                }
+                var doneValue=0;
+                if(curStreak >= 21){
+                    doneValue = "✔";
+                } else {
+                    doneValue = " ";
+                }
+
+                $("#currentStreak").append("<tr><td>"+curStreak+"</td></tr>");
+                $("#longestStreak").append("<tr><td>"+longStreak+"</td></tr>");
+                $("#lastUpdated").append("<tr><td>"+date+"</td></tr>");
+                $("#completedHabit").append("<tr><td>"+doneValue+"</td></tr>");
+            }
         }
         //console.log("First Name:" + userHabits[0].name);
         //for (var i = 0; i < userHabits.length; i++) {
